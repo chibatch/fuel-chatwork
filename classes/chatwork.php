@@ -72,9 +72,12 @@ class ChatWork extends Object
      */
     public function create_room($params)
     {
-        $room = Room::forge($params);
-        $room->save();
+        $result = $this->api->create_room($params);
 
-        return $room;
+        $room_id = \Arr::get($result, 'room_id');
+
+        $room_data = $this->api->get_room($room_id);
+
+        return new Room($room_data, $this->api);
     }
 }
