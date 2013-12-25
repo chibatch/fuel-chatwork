@@ -22,6 +22,50 @@ use ChatWork\Model\Room;
 class Tasks extends Collection
 {
 	/**
+	 * Find tasks
+	 *
+	 * @param array $room_id
+	 */
+	public static function find($room_id = null)
+	{
+		if (is_null($room_id) or $room_id === 'self')
+		{
+			return self::find_my_tasks();
+		}
+
+		return self::find_by_room($room_id);
+	}
+
+	/**
+	 * Find my tasks
+	 *
+	 * @return ChatWork\Collection\Contacts
+	 */
+	private static function find_my_tasks()
+	{
+		$api = parent::get_api();
+
+		$result = $api->get_my_tasks();
+
+		return new static($result);
+	}
+
+	/**
+	 * Find tasks by room
+	 *
+	 * @param  int|string
+	 * @return ChatWork\Collection\Contacts
+	 */
+	private static function find_by_room($room_id)
+	{
+		$api = parent::get_api();
+
+		$result = $api->get_room_tasks($room_id);
+
+		return new static($result, $room_id);
+	}
+
+	/**
 	 * Room ID
 	 *
 	 * @var int|string
@@ -52,5 +96,27 @@ class Tasks extends Collection
 		$room_id = \Arr::get($data, 'room.room_id', $this->room_id);
 
 		return new Task($data, $room_id);
+	}
+
+	/**
+	 * Get task
+	 *
+	 * @param  int|string
+	 * @return ChatWork\Model\Task
+	 */
+	public function get($task_id)
+	{
+		$task = \Arr::get($this->origin, $task_id);
+
+		if (!is_null($task))
+		{
+			return $task;
+		}
+
+		$api = parent::get_api();
+
+		$result = $api->get_room_task($this->room_id, $task_id);
+
+		return Task($result, $this->room_id);
 	}
 }

@@ -71,9 +71,7 @@ class CurrentUser extends Model
 	 */
 	public function get_tasks($params = array())
 	{
-		$result = $this->api->get_my_tasks($params);
-
-		return new Tasks($result, null);
+		return Tasks::find('self');
 	}
 
 	/**

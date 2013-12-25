@@ -143,9 +143,7 @@ class Room extends Model
 	 */
 	public function get_tasks($conditions = array())
 	{
-		$result = $this->api->get_room_tasks($this->room_id, $conditions);
-
-		return new Tasks($result, $this->room_id);
+		return Tasks::find($this->room_id);
 	}
 
 	/**
