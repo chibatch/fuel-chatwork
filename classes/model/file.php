@@ -10,6 +10,8 @@
 namespace ChatWork\Model;
 
 use ChatWork\Model;
+use ChatWork\Model\Room;
+use ChatWork\Model\Message;
 
 /**
  * File model
@@ -62,5 +64,48 @@ class File extends Model
 		parent::__construct($data);
 
 		$this->room_id = $room_id;
+	}
+
+	/**
+	 * Get room
+	 *
+	 * @return ChatWork\Model\Room
+	 */
+	public function get_room()
+	{
+		if (empty($this->room_id))
+		{
+			return null;
+		}
+
+		return Room::find($this->room_id);
+	}
+
+	/**
+	 * Get message
+	 *
+	 * @return ChatWork\Model\Message
+	 */
+	public function get_message()
+	{
+		if (empty($this->room_id))
+		{
+			return null;
+		}
+
+		$message_id = $this->message_id;
+
+		return Message::find($this->room_id, $message_id);
+	}
+
+	/**
+	 * Get upload date
+	 *
+	 * @param  string
+	 * @return string
+	 */
+	public function get_upload_datetime($format = 'Y-m-d H:i:s')
+	{
+		return $this->get_datetime($this->upload_time, $format);
 	}
 }
