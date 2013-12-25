@@ -62,6 +62,18 @@ class Message extends Model
 	}
 
 	/**
+	 * Message is updated
+	 *
+	 * @return bool
+	 */
+	public function is_updated()
+	{
+		$update_time = $this->update_time;
+
+		return (bool) $update_time > 0;
+	}
+
+	/**
 	 * Get room
 	 *
 	 * @return ChatWork\Model\Room
