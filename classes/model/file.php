@@ -10,6 +10,7 @@
 namespace ChatWork\Model;
 
 use ChatWork\Model;
+use ChatWork\Model\Room;
 
 /**
  * File model
@@ -62,5 +63,20 @@ class File extends Model
 		parent::__construct($data);
 
 		$this->room_id = $room_id;
+	}
+
+	/**
+	 * Get room
+	 *
+	 * @return ChatWork\Model\Room
+	 */
+	public function get_room()
+	{
+		if (empty($this->room_id))
+		{
+			return null;
+		}
+
+		return Room::find($this->room_id);
 	}
 }
