@@ -81,4 +81,19 @@ class CurrentUser extends Model
 	{
 		return Contacts::find();
 	}
+
+	/**
+	 * Get my chat
+	 *
+	 * @return ChatWork\Model\Room
+	 */
+	public function get_room()
+	{
+		if (empty($this->room_id))
+		{
+			return null;
+		}
+
+		return Room::find($this->room_id);
+	}
 }
