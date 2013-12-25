@@ -32,9 +32,9 @@ abstract class Collection extends Object implements \IteratorAggregate, \ArrayAc
 	 * @param array
 	 * @param ChatWork\Api
 	 */
-	public function __construct(array $data, \ChatWork\Api $api)
+	public function __construct($data = array())
 	{
-		$this->api    = $api;
+		$this->api = parent::get_api();
 
 		$this->set_data($data);
 	}
@@ -48,6 +48,10 @@ abstract class Collection extends Object implements \IteratorAggregate, \ArrayAc
 	 */
 	public function set_data($data)
 	{
+		if (empty($data)) {
+			return;
+		}
+
 		foreach ($data as $raw_data)
 		{
 			$this->origin[] = $this->to_model($raw_data);
@@ -69,7 +73,7 @@ abstract class Collection extends Object implements \IteratorAggregate, \ArrayAc
 	 */
 	public function offsetExists($offset)
 	{
-		return isset($this->data[$offset]);
+		return isset($this->origin[$offset]);
 	}
 
 	/**
@@ -77,7 +81,7 @@ abstract class Collection extends Object implements \IteratorAggregate, \ArrayAc
 	 */
 	public function offsetGet($offset)
 	{
-		return $this->data[$offset];
+		return $this->origin[$offset];
 	}
 
 	/**

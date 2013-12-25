@@ -20,6 +20,21 @@ use ChatWork\Model\File;
  */
 class Files extends Collection
 {
+	/**
+	 * Find files
+	 *
+	 * @param  int|string
+	 * @return ChatWork\Collection\Files
+	 */
+	public static function find($room_id, $conditions = array())
+	{
+		$api = parent::get_api();
+
+		$result = $api->get_room_files($room_id, $conditions);
+
+		return new static($result, $room_id);
+	}
+
 	/** @var string|int Room ID */
 	protected $room_id;
 
@@ -28,13 +43,12 @@ class Files extends Collection
 	 *
 	 * @param array
 	 * @param int
-	 * @param \ChatWork\Api
 	 */
-	public function __construct(array $data = array(), $room_id = null, \ChatWork\Api $api)
+	public function __construct($data = array(), $room_id = null)
 	{
 		$this->room_id = $room_id;
 
-		parent::__construct($data, $api);
+		parent::__construct($data);
 	}
 
 	/**
@@ -44,6 +58,6 @@ class Files extends Collection
 	 */
 	protected function to_model($data)
 	{
-		return new File($data, $this->room_id, $this->api);
+		return new File($data, $this->room_id);
 	}
 }

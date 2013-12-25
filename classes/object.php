@@ -9,6 +9,8 @@
  */
 namespace ChatWork;
 
+use ChatWork\Api;
+
 /**
  * Base object for Fuel-ChatWork
  *
@@ -16,6 +18,19 @@ namespace ChatWork;
  */
 class Object
 {
+	/**
+	 * Get API class
+	 *
+	 * @return ChatWork\Api
+	 */
+	protected static function get_api()
+	{
+		$auth_params = \Session::get('chatwork');
+
+		return Api::forge($auth_params);
+	}
+
+
 	/**
 	 * Object data
 	 *

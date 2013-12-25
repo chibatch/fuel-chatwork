@@ -19,18 +19,34 @@ use ChatWork\Object;
  */
 class Model extends Object
 {
-	/** @bar ChatWork\Api */
-	protected $api;
-
 	/**
 	 * Constructor
 	 *
 	 * @param array
 	 */
-	public function __construct(array $data = array(), \ChatWork\Api $api)
+	public function __construct(array $data = array())
 	{
-		$this->api  = $api;
-
 		parent::__construct($data);
+	}
+
+	/**
+	 * Get datetime
+	 *
+	 * @param  int
+	 * @param  string
+	 * @return string
+	 */
+	protected function get_datetime($timestamp, $format='Y-m-d')
+	{
+		if ($timestamp === 0)
+		{
+			return 'none';
+		}
+
+		$datetime = new \DateTime();
+		$datetime->setTimestamp($timestamp);
+
+		return $datetime->format($format);
+
 	}
 }

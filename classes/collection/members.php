@@ -21,6 +21,21 @@ use ChatWork\Model\Member;
 class Members extends Collection
 {
 	/**
+	 * Find members
+	 *
+	 * @param  int|string
+	 * @return ChatWork\Collection\Members
+	 */
+	public static function find($room_id)
+	{
+		$api = parent::get_api();
+
+		$result = $api->get_room_members($room_id);
+
+		return new static($result, $room_id);
+	}
+
+	/**
 	 * Room ID
 	 *
 	 * @var int|string
@@ -32,13 +47,12 @@ class Members extends Collection
 	 *
 	 * @param array
 	 * @param string|int
-	 * @param \ChatWork\Api
 	 */
-	public function __construct(array $data = array(), $room_id = null, \ChatWork\Api $api)
+	public function __construct($data = array(), $room_id = null)
 	{
 		$this->room_id = $room_id;
 
-		parent::__construct($data, $api);
+		parent::__construct($data);
 	}
 
 	/**
@@ -48,6 +62,6 @@ class Members extends Collection
 	 */
 	protected function to_model($data)
 	{
-		return new Member($data, $this->room_id, $this->api);
+		return new Member($data, $this->room_id);
 	}
 }

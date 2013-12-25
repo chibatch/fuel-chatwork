@@ -19,6 +19,22 @@ use ChatWork\Model;
  */
 class Message extends Model
 {
+	/**
+	 * Find message
+	 *
+	 * @param  int|string
+	 * @param  int|string
+	 * @return ChatWork\Model\Message
+	 */
+	public static function find($room_id, $message_id)
+	{
+		$api = parent::get_api();
+
+		$result = $api->get_room_message($room_id, $message_id);
+
+		return new static($result, $room_id);
+	}
+
 	protected $message_id  = 0;
 	protected $account     = array();
 	protected $body        = '';
@@ -37,12 +53,60 @@ class Message extends Model
 	 *
 	 * @param array
 	 * @param int|string
-	 * @param int
 	 */
-	public function __construct(array $data = array(), $room_id = null, \ChatWork\Api $api)
+	public function __construct($data = array(), $room_id = null)
 	{
 		$this->room_id = $room_id;
 
-		parent::__construct($data, $api);
+		parent::__construct($data);
+	}
+
+	/**
+	 * Message is updated
+	 *
+	 * @return bool
+	 */
+	public function is_updated()
+	{
+		$update_time = $this->update_time;
+
+		return (bool) $update_time > 0;
+	}
+
+	/**
+	 * Get room
+	 *
+	 * @return ChatWork\Model\Room
+	 */
+	public function get_room()
+	{
+		if (empty($this->room_id))
+		{
+			return null;
+		}
+
+		return Room::find($this->room_id);
+	}
+
+	/**
+	 * Get send time
+	 *
+	 * @param  string
+	 * @return string
+	 */
+	public function get_send_time($format = 'Y-m-d H:i:s')
+	{
+		return $this->get_datetime($this->send_time, $format);
+	}
+
+	/**
+	 * Get update time
+	 *
+	 * @param  string
+	 * @return string
+	 */
+	public function get_update_time($format = 'Y-m-d H:i:s')
+	{
+		return $this->get_datetime($this->update_time, $format);
 	}
 }

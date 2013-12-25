@@ -58,9 +58,7 @@ class CurrentUser extends Model
 	 */
 	public function get_rooms()
 	{
-		$result = $this->api->get_my_rooms();
-
-		return new Rooms($result, $this->api);
+		return Rooms::find();
 	}
 
 	/**
@@ -71,9 +69,7 @@ class CurrentUser extends Model
 	 */
 	public function get_tasks($params = array())
 	{
-		$result = $this->api->get_my_tasks($params);
-
-		return new Tasks($result, null, $this->api);
+		return Tasks::find('self');
 	}
 
 	/**
@@ -83,8 +79,21 @@ class CurrentUser extends Model
 	 */
 	public function get_contacts()
 	{
-		$result = $this->api->get_contacts();
+		return Contacts::find();
+	}
 
-		return new Contacts($result, $this->api);
+	/**
+	 * Get my chat
+	 *
+	 * @return ChatWork\Model\Room
+	 */
+	public function get_room()
+	{
+		if (empty($this->room_id))
+		{
+			return null;
+		}
+
+		return Room::find($this->room_id);
 	}
 }

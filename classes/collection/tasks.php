@@ -22,6 +22,52 @@ use ChatWork\Model\Room;
 class Tasks extends Collection
 {
 	/**
+	 * Find tasks
+	 *
+	 * @param  array $room_id
+	 * @param  array
+	 * @return ChatWork\Collection\Tasks
+	 */
+	public static function find($room_id = null, $conditions = array())
+	{
+		if (is_null($room_id) or $room_id === 'self')
+		{
+			return self::find_my_tasks($conditions);
+		}
+
+		return self::find_by_room($room_id, $conditions);
+	}
+
+	/**
+	 * Find my tasks
+	 *
+	 * @return ChatWork\Collection\Contacts
+	 */
+	private static function find_my_tasks()
+	{
+		$api = parent::get_api();
+
+		$result = $api->get_my_tasks();
+
+		return new static($result);
+	}
+
+	/**
+	 * Find tasks by room
+	 *
+	 * @param  int|string
+	 * @return ChatWork\Collection\Contacts
+	 */
+	private static function find_by_room($room_id, $conditions = array())
+	{
+		$api = parent::get_api();
+
+		$result = $api->get_room_tasks($room_id, $conditions);
+
+		return new static($result, $room_id);
+	}
+
+	/**
 	 * Room ID
 	 *
 	 * @var int|string
@@ -33,13 +79,12 @@ class Tasks extends Collection
 	 *
 	 * @param array
 	 * @param string|int
-	 * @param \ChatWork\Api
 	 */
-	public function __construct($data, $room_id = null, \ChatWork\Api $api)
+	public function __construct($data, $room_id = null)
 	{
 		$this->room_id = $room_id;
 
-		parent::__construct($data, $api);
+		parent::__construct($data);
 	}
 
 	/**
@@ -52,6 +97,6 @@ class Tasks extends Collection
 	{
 		$room_id = \Arr::get($data, 'room.room_id', $this->room_id);
 
-		return new Task($data, $room_id, $this->api);
+		return new Task($data, $room_id);
 	}
 }
