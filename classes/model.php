@@ -28,4 +28,25 @@ class Model extends Object
 	{
 		parent::__construct($data);
 	}
+
+	/**
+	 * Get datetime
+	 *
+	 * @param  int
+	 * @param  string
+	 * @return string
+	 */
+	protected function get_datetime($timestamp, $format='Y-m-d')
+	{
+		if ($timestamp === 0)
+		{
+			return 'none';
+		}
+
+		$datetime = new \DateTime();
+		$datetime->setTimestamp($timestamp);
+
+		return $datetime->format($format);
+
+	}
 }
