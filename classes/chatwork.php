@@ -59,9 +59,7 @@ class ChatWork extends Object
 	 */
 	public function get_room($room_id)
 	{
-		$result = $this->api->get_room($room_id);
-
-		return new Room($result, $this->api);
+		return Room::find($room_id);
 	}
 
 	/**
@@ -76,8 +74,6 @@ class ChatWork extends Object
 
 		$room_id = \Arr::get($result, 'room_id');
 
-		$room_data = $this->api->get_room($room_id);
-
-		return new Room($room_data, $this->api);
+		return $this->get_room($room_id);
 	}
 }

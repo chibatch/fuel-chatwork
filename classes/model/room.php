@@ -26,6 +26,21 @@ use ChatWork\Collection\Messages;
  */
 class Room extends Model
 {
+	/**
+	 * Find Room
+	 *
+	 * @param  int|string
+	 * @return ChatWork\Model\Room
+	 */
+	public static function find($room_id)
+	{
+		$api = parent::get_api();
+
+		$result = $api->get_room($room_id);
+
+		return new static($result);
+	}
+
 	protected $room_id          = 0;
 	protected $name             = '';
 	protected $type             = 'group';
@@ -109,9 +124,7 @@ class Room extends Model
 	 */
 	public function get_message($message_id)
 	{
-		$result = $this->api->get_room_message($this->room_id, $message_id);
-
-		return new Message($result, $this->room_id);
+		return Message::find($this->room_id, $message_id);
 	}
 
 	/**
@@ -151,9 +164,7 @@ class Room extends Model
 	 */
 	public function get_task($task_id, $conditions = array())
 	{
-		$result = $this->api->get_room_task($this->room_id, $task_id, $conditions);
-
-		return new Task($result, $this->room_id);
+		return Task::find($this->room_id, $task_id, $conditions);
 	}
 
 	/**
@@ -194,8 +205,6 @@ class Room extends Model
 	 */
 	public function get_file($file_id, $conditions = array())
 	{
-		$result = $this->api->get_room_file($this->room_id, $file_id, $conditions);
-
-		return new File($result, $this->room_id);
+		return File::find($this->room_id, $file_id, $conditions);
 	}
 }
