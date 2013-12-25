@@ -79,4 +79,15 @@ class File extends Model
 
 		return Room::find($this->room_id);
 	}
+
+	/**
+	 * Get upload date
+	 *
+	 * @param  string
+	 * @return string
+	 */
+	public function get_upload_datetime($format = 'Y-m-d H:i:s')
+	{
+		return $this->get_datetime($this->upload_time, $format);
+	}
 }
