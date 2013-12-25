@@ -11,6 +11,7 @@ namespace ChatWork\Model;
 
 use ChatWork\Model;
 use ChatWork\Model\Room;
+use ChatWork\Model\Message;
 
 /**
  * File model
@@ -78,6 +79,23 @@ class File extends Model
 		}
 
 		return Room::find($this->room_id);
+	}
+
+	/**
+	 * Get message
+	 *
+	 * @return ChatWork\Model\Message
+	 */
+	public function get_message()
+	{
+		if (empty($this->room_id))
+		{
+			return null;
+		}
+
+		$message_id = $this->message_id;
+
+		return Message::find($this->room_id, $message_id);
 	}
 
 	/**
