@@ -21,6 +21,21 @@ use ChatWork\Model\Member;
 class Members extends Collection
 {
 	/**
+	 * Find members
+	 *
+	 * @param  int|string
+	 * @return ChatWork\Collection\Members
+	 */
+	public static function find($room_id)
+	{
+		$api = parent::get_api();
+
+		$result = $api->get_room_members($room_id);
+
+		return new static($result, $room_id);
+	}
+
+	/**
 	 * Room ID
 	 *
 	 * @var int|string

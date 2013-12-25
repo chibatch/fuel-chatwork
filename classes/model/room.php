@@ -64,9 +64,7 @@ class Room extends Model
 	 */
 	public function get_members()
 	{
-		$result = $this->api->get_room_members($this->room_id);
-
-		return new Members($result, $this->room_id);
+		return Members::find($this->room_id);
 	}
 
 	/**
