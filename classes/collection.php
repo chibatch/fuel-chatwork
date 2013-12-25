@@ -73,7 +73,7 @@ abstract class Collection extends Object implements \IteratorAggregate, \ArrayAc
 	 */
 	public function offsetExists($offset)
 	{
-		return isset($this->data[$offset]);
+		return isset($this->origin[$offset]);
 	}
 
 	/**
@@ -81,7 +81,7 @@ abstract class Collection extends Object implements \IteratorAggregate, \ArrayAc
 	 */
 	public function offsetGet($offset)
 	{
-		return $this->data[$offset];
+		return $this->origin[$offset];
 	}
 
 	/**

@@ -10,6 +10,7 @@
 namespace ChatWork\Model;
 
 use ChatWork\Model;
+use ChatWork\Model\Room;
 
 /**
  * Contact model
@@ -27,4 +28,19 @@ class Contact extends Model
 	protected $organization_name = '';
 	protected $department        = '';
 	protected $avatar_url        = '';
+
+	/**
+	 * Get direct chat
+	 *
+	 * @return ChatWork\Model\Room
+	 */
+	public function get_room()
+	{
+		if (empty($this->room_id))
+		{
+			return null;
+		}
+
+		return Room::find($this->room_id);
+	}
 }
