@@ -10,6 +10,7 @@
 namespace ChatWork\Model;
 
 use ChatWork\Model;
+use ChatWork\Model\Room;
 
 /**
  * Task model
@@ -63,5 +64,20 @@ class Task extends Model
 		$this->room_id = $room_id;
 
 		parent::__construct($data);
+	}
+
+	/**
+	 * Get room
+	 *
+	 * @return ChatWork\Model\Room
+	 */
+	public function get_room()
+	{
+		if (empty($this->room_id))
+		{
+			return null;
+		}
+
+		return Room::find($this->room_id);
 	}
 }
