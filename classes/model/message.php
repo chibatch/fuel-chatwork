@@ -60,4 +60,41 @@ class Message extends Model
 
 		parent::__construct($data);
 	}
+
+	/**
+	 * Get room
+	 *
+	 * @return ChatWork\Model\Room
+	 */
+	public function get_room()
+	{
+		if (empty($this->room_id))
+		{
+			return null;
+		}
+
+		return Room::find($this->room_id);
+	}
+
+	/**
+	 * Get send time
+	 *
+	 * @param  string
+	 * @return string
+	 */
+	public function get_send_time($format = 'Y-m-d H:i:s')
+	{
+		return $this->get_datetime($this->send_time, $format);
+	}
+
+	/**
+	 * Get update time
+	 *
+	 * @param  string
+	 * @return string
+	 */
+	public function get_update_time($format = 'Y-m-d H:i:s')
+	{
+		return $this->get_datetime($this->update_time, $format);
+	}
 }
