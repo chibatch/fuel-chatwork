@@ -98,9 +98,7 @@ class Room extends Model
 	 */
 	public function get_messages()
 	{
-		$result = $this->api->get_room_messages($this->room_id);
-
-		return new Messages($result, $this->room_id);
+		return Messages::find($this->room_id);
 	}
 
 	/**

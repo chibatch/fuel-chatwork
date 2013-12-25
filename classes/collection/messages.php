@@ -21,6 +21,17 @@ use ChatWork\Model\Message;
 class Messages extends Collection
 {
 	/**
+	 * Find messages
+	 *
+	 * @param  int|string
+	 * @return ChatWork\Collection\Messages
+	 */
+	public static function find($room_id)
+	{
+		return array();
+	}
+
+	/**
 	 * Room ID
 	 *
 	 * @var int|string
