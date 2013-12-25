@@ -152,7 +152,7 @@ class Room extends Model
 	 */
 	public function get_tasks($conditions = array())
 	{
-		return Tasks::find($this->room_id);
+		return Tasks::find($this->room_id, $conditions);
 	}
 
 	/**

@@ -58,11 +58,11 @@ class Tasks extends Collection
 	 * @param  int|string
 	 * @return ChatWork\Collection\Contacts
 	 */
-	private static function find_by_room($room_id)
+	private static function find_by_room($room_id, $conditions = array())
 	{
 		$api = parent::get_api();
 
-		$result = $api->get_room_tasks($room_id);
+		$result = $api->get_room_tasks($room_id, $conditions);
 
 		return new static($result, $room_id);
 	}
