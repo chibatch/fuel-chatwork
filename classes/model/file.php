@@ -57,7 +57,7 @@ class File extends Model
 	 * @param array
 	 * @param int
 	 */
-	public function __construct(array $data = array(), $room_id = null)
+	public function __construct($data = array(), $room_id = null)
 	{
 		parent::__construct($data);
 

@@ -42,7 +42,7 @@ class Member extends Model
 	 * @param int|string
 	 * @param ChatWork\Api
 	 */
-	public function __construct(array $data = array(), $room_id = null)
+	public function __construct($data = array(), $room_id = null)
 	{
 		$this->room_id = $room_id;
 
