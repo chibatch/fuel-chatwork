@@ -97,26 +97,4 @@ class Tasks extends Collection
 
 		return new Task($data, $room_id);
 	}
-
-	/**
-	 * Get task
-	 *
-	 * @param  int|string
-	 * @return ChatWork\Model\Task
-	 */
-	public function get($task_id)
-	{
-		$task = \Arr::get($this->origin, $task_id);
-
-		if (!is_null($task))
-		{
-			return $task;
-		}
-
-		$api = parent::get_api();
-
-		$result = $api->get_room_task($this->room_id, $task_id);
-
-		return Task($result, $this->room_id);
-	}
 }
