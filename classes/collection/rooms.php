@@ -28,6 +28,6 @@ class Rooms extends Collection
 	 */
 	protected function to_model($data)
 	{
-		return new Room($data, $this->api);
+		return new Room($data);
 	}
 }

@@ -41,7 +41,9 @@ class Api extends \Model
      */
     public function __construct($params = array())
     {
-        $this->token = \Arr::get($params, 'token');
+        $token = \Arr::get($params, 'token');
+
+        \Session::set('chatwork.token', $token);
     }
 
     /**
@@ -62,7 +64,7 @@ class Api extends \Model
         $request = \Request::forge($url, 'curl');
         $request->set_method($method);
         $request->set_params($params);
-        $request->set_header('X-ChatWorkToken', $this->token);
+        $request->set_header('X-ChatWorkToken', \Session::get('chatwork.token'));
 
         $request->execute();
 

@@ -39,11 +39,10 @@ class File extends Model
 	 *
 	 * @param array
 	 * @param int
-	 * @param ChatWork\Api
 	 */
-	public function __construct(array $data = array(), $room_id = null, \ChatWork\Api $api)
+	public function __construct(array $data = array(), $room_id = null)
 	{
-		parent::__construct($data, $api);
+		parent::__construct($data);
 
 		$this->room_id = $room_id;
 	}

@@ -39,13 +39,12 @@ class Task extends Model
 	 * Constructor
 	 *
 	 * @param array
-	 * @param int
-	 * @param ChatWork\Api
+	 * @param int|string
 	 */
-	public function __construct(array $data = array(), $room_id = null, \ChatWork\Api $api)
+	public function __construct(array $data = array(), $room_id = null)
 	{
 		$this->room_id = $room_id;
 
-		parent::__construct($data, $api);
+		parent::__construct($data);
 	}
 }

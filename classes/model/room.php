@@ -66,7 +66,7 @@ class Room extends Model
 	{
 		$result = $this->api->get_room_members($this->room_id);
 
-		return new Members($result, $this->room_id, $this->api);
+		return new Members($result, $this->room_id);
 	}
 
 	/**
@@ -102,7 +102,7 @@ class Room extends Model
 	{
 		$result = $this->api->get_room_messages($this->room_id);
 
-		return new Messages($result, $this->room_id, $this->api);
+		return new Messages($result, $this->room_id);
 	}
 
 	/**
@@ -115,7 +115,7 @@ class Room extends Model
 	{
 		$result = $this->api->get_room_message($this->room_id, $message_id);
 
-		return new Message($result, $this->room_id, $this->api);
+		return new Message($result, $this->room_id);
 	}
 
 	/**
@@ -145,7 +145,7 @@ class Room extends Model
 	{
 		$result = $this->api->get_room_tasks($this->room_id, $conditions);
 
-		return new Tasks($result, $this->room_id, $this->api);
+		return new Tasks($result, $this->room_id);
 	}
 
 	/**
@@ -159,7 +159,7 @@ class Room extends Model
 	{
 		$result = $this->api->get_room_task($this->room_id, $task_id, $conditions);
 
-		return new Task($result, $this->room_id, $this->api);
+		return new Task($result, $this->room_id);
 	}
 
 	/**
@@ -190,7 +190,7 @@ class Room extends Model
 	{
 		$result = $this->api->get_room_files($this->room_id, $conditions);
 
-		return new Files($result, $this->room_id, $this->api);
+		return new Files($result, $this->room_id);
 	}
 
 	/**
@@ -204,6 +204,6 @@ class Room extends Model
 	{
 		$result = $this->api->get_room_file($this->room_id, $file_id, $conditions);
 
-		return new File($result, $this->room_id, $this->api);
+		return new File($result, $this->room_id);
 	}
 }

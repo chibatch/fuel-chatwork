@@ -32,9 +32,9 @@ abstract class Collection extends Object implements \IteratorAggregate, \ArrayAc
 	 * @param array
 	 * @param ChatWork\Api
 	 */
-	public function __construct(array $data, \ChatWork\Api $api)
+	public function __construct(array $data)
 	{
-		$this->api    = $api;
+		$this->api = parent::get_api();
 
 		$this->set_data($data);
 	}

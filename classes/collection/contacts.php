@@ -20,6 +20,20 @@ use ChatWork\Model\Contact;
  */
 class Contacts extends Collection
 {
+    /**
+     * Get contact list
+     *
+     * @return ChatWork\Collection\Contacts
+     */
+    public static function find()
+    {
+        $api = static::get_api();
+
+        $result = $api->get_contacts();
+
+        return new static($result);
+    }
+
 	/**
 	 * Data to Model
 	 *
@@ -27,6 +41,6 @@ class Contacts extends Collection
 	 */
 	protected function to_model($data)
 	{
-		return new Contact($data, $this->api);
+		return new Contact($data);
 	}
 }

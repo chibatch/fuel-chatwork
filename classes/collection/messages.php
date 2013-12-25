@@ -32,9 +32,8 @@ class Messages extends Collection
 	 *
 	 * @param array
 	 * @param string|int
-	 * @param \ChatWork\Api
 	 */
-	public function __construct(array $data = array(), $room_id = null, \ChatWork\Api $api)
+	public function __construct(array $data = array(), $room_id = null)
 	{
 		$this->room_id = $room_id;
 
@@ -49,6 +48,6 @@ class Messages extends Collection
 	 */
 	protected function to_model($data)
 	{
-		return new Message($data, $this->room_id, $this->api);
+		return new Message($data, $this->room_id);
 	}
 }

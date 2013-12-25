@@ -28,13 +28,12 @@ class Files extends Collection
 	 *
 	 * @param array
 	 * @param int
-	 * @param \ChatWork\Api
 	 */
-	public function __construct(array $data = array(), $room_id = null, \ChatWork\Api $api)
+	public function __construct(array $data = array(), $room_id = null)
 	{
 		$this->room_id = $room_id;
 
-		parent::__construct($data, $api);
+		parent::__construct($data);
 	}
 
 	/**
@@ -44,6 +43,6 @@ class Files extends Collection
 	 */
 	protected function to_model($data)
 	{
-		return new File($data, $this->room_id, $this->api);
+		return new File($data, $this->room_id);
 	}
 }

@@ -33,13 +33,12 @@ class Tasks extends Collection
 	 *
 	 * @param array
 	 * @param string|int
-	 * @param \ChatWork\Api
 	 */
-	public function __construct($data, $room_id = null, \ChatWork\Api $api)
+	public function __construct($data, $room_id = null)
 	{
 		$this->room_id = $room_id;
 
-		parent::__construct($data, $api);
+		parent::__construct($data);
 	}
 
 	/**
@@ -52,6 +51,6 @@ class Tasks extends Collection
 	{
 		$room_id = \Arr::get($data, 'room.room_id', $this->room_id);
 
-		return new Task($data, $room_id, $this->api);
+		return new Task($data, $room_id);
 	}
 }

@@ -37,12 +37,11 @@ class Message extends Model
 	 *
 	 * @param array
 	 * @param int|string
-	 * @param int
 	 */
-	public function __construct(array $data = array(), $room_id = null, \ChatWork\Api $api)
+	public function __construct(array $data = array(), $room_id = null)
 	{
 		$this->room_id = $room_id;
 
-		parent::__construct($data, $api);
+		parent::__construct($data);
 	}
 }

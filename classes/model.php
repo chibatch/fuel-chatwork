@@ -19,18 +19,13 @@ use ChatWork\Object;
  */
 class Model extends Object
 {
-	/** @bar ChatWork\Api */
-	protected $api;
-
 	/**
 	 * Constructor
 	 *
 	 * @param array
 	 */
-	public function __construct(array $data = array(), \ChatWork\Api $api)
+	public function __construct(array $data = array())
 	{
-		$this->api  = $api;
-
 		parent::__construct($data);
 	}
 }

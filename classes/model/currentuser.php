@@ -60,7 +60,7 @@ class CurrentUser extends Model
 	{
 		$result = $this->api->get_my_rooms();
 
-		return new Rooms($result, $this->api);
+		return new Rooms($result);
 	}
 
 	/**
@@ -73,7 +73,7 @@ class CurrentUser extends Model
 	{
 		$result = $this->api->get_my_tasks($params);
 
-		return new Tasks($result, null, $this->api);
+		return new Tasks($result, null);
 	}
 
 	/**
@@ -83,8 +83,6 @@ class CurrentUser extends Model
 	 */
 	public function get_contacts()
 	{
-		$result = $this->api->get_contacts();
-
-		return new Contacts($result, $this->api);
+		return Contacts::find();
 	}
 }
