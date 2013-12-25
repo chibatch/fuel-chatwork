@@ -126,16 +126,6 @@ class Task extends Model
 	 */
 	public function get_limit($format = 'Y-m-d')
 	{
-		$limit = $this->limit_time;
-
-		if ($limit === 0)
-		{
-			return 'none';
-		}
-
-		$limit_datetime = new \DateTime();
-		$limit_datetime->setTimestamp($limit);
-
-		return $limit_datetime->format($format);
+		return $this->get_datetime($this->limit_time, $format);
 	}
 }
