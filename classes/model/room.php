@@ -182,7 +182,7 @@ class Room extends Model
 	 */
 	public function get_files($conditions = array())
 	{
-		return Files::get($this->room_id);
+		return Files::get($this->room_id, $conditions);
 	}
 
 	/**

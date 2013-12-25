@@ -26,11 +26,11 @@ class Files extends Collection
 	 * @param  int|string
 	 * @return ChatWork\Collection\Files
 	 */
-	public static function find($room_id)
+	public static function find($room_id, $conditions = array())
 	{
 		$api = parent::get_api();
 
-		$result = $api->get_room_files($room_id);
+		$result = $api->get_room_files($room_id, $conditions);
 
 		return new static($result, $room_id);
 	}

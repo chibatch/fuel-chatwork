@@ -144,11 +144,12 @@ class Api extends \Model
 	/**
 	 * Get my tasks
 	 *
+	 * @param  array
 	 * @return array
 	 */
-	public function get_my_tasks()
+	public function get_my_tasks($conditions = array())
 	{
-		return $this->get('/my/tasks');
+		return $this->get('/my/tasks', $conditions);
 	}
 
 	/**

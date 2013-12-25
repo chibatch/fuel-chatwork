@@ -24,16 +24,18 @@ class Tasks extends Collection
 	/**
 	 * Find tasks
 	 *
-	 * @param array $room_id
+	 * @param  array $room_id
+	 * @param  array
+	 * @return ChatWork\Collection\Tasks
 	 */
-	public static function find($room_id = null)
+	public static function find($room_id = null, $conditions = array())
 	{
 		if (is_null($room_id) or $room_id === 'self')
 		{
-			return self::find_my_tasks();
+			return self::find_my_tasks($conditions);
 		}
 
-		return self::find_by_room($room_id);
+		return self::find_by_room($room_id, $conditions);
 	}
 
 	/**
