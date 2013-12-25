@@ -19,6 +19,22 @@ use ChatWork\Model;
  */
 class Message extends Model
 {
+	/**
+	 * Find message
+	 *
+	 * @param  int|string
+	 * @param  int|string
+	 * @return ChatWork\Model\Message
+	 */
+	public static function find($room_id, $message_id)
+	{
+		$api = parent::get_api();
+
+		$result = $api->get_room_message($room_id, $message_id);
+
+		return new static($result, $room_id);
+	}
+
 	protected $message_id  = 0;
 	protected $account     = array();
 	protected $body        = '';
@@ -37,12 +53,11 @@ class Message extends Model
 	 *
 	 * @param array
 	 * @param int|string
-	 * @param int
 	 */
-	public function __construct(array $data = array(), $room_id = null, \ChatWork\Api $api)
+	public function __construct($data = array(), $room_id = null)
 	{
 		$this->room_id = $room_id;
 
-		parent::__construct($data, $api);
+		parent::__construct($data);
 	}
 }

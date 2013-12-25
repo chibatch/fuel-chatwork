@@ -19,6 +19,23 @@ use ChatWork\Model;
  */
 class Task extends Model
 {
+	/**
+	 * Find task
+	 *
+	 * @param  int|string
+	 * @param  int|string
+	 * @param  array
+	 * @return ChatWork\Model\Task
+	 */
+	public static function find($room_id, $task_id, $conditions = array())
+	{
+		$api = parent::get_api();
+
+		$result = $api->get_room_task($room_id, $task_id, $conditions);
+
+		return new static($result, $room_id);
+	}
+
 	protected $task_id             = 0;
 	protected $account             = array();
 	protected $assigned_by_account = array();
@@ -39,13 +56,12 @@ class Task extends Model
 	 * Constructor
 	 *
 	 * @param array
-	 * @param int
-	 * @param ChatWork\Api
+	 * @param int|string
 	 */
-	public function __construct(array $data = array(), $room_id = null, \ChatWork\Api $api)
+	public function __construct($data = array(), $room_id = null)
 	{
 		$this->room_id = $room_id;
 
-		parent::__construct($data, $api);
+		parent::__construct($data);
 	}
 }
