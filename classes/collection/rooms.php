@@ -21,6 +21,20 @@ use ChatWork\Model\Room;
 class Rooms extends Collection
 {
 	/**
+	 * Find rooms
+	 *
+	 * @return ChatWork\Collection\Rooms
+	 */
+	public static function find()
+	{
+		$api = parent::get_api();
+
+		$result = $api->get_my_rooms();
+
+		return new static($result);
+	}
+
+	/**
 	 * Raw data to Room model
 	 *
 	 * @param  array

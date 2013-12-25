@@ -58,9 +58,7 @@ class CurrentUser extends Model
 	 */
 	public function get_rooms()
 	{
-		$result = $this->api->get_my_rooms();
-
-		return new Rooms($result);
+		return Rooms::find();
 	}
 
 	/**
