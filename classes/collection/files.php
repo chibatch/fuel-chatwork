@@ -20,6 +20,21 @@ use ChatWork\Model\File;
  */
 class Files extends Collection
 {
+	/**
+	 * Find files
+	 *
+	 * @param  int|string
+	 * @return ChatWork\Collection\Files
+	 */
+	public static function find($room_id)
+	{
+		$api = parent::get_api();
+
+		$result = $api->get_room_files($room_id);
+
+		return new static($result, $room_id);
+	}
+
 	/** @var string|int Room ID */
 	protected $room_id;
 

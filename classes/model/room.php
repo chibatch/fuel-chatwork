@@ -186,9 +186,7 @@ class Room extends Model
 	 */
 	public function get_files($conditions = array())
 	{
-		$result = $this->api->get_room_files($this->room_id, $conditions);
-
-		return new Files($result, $this->room_id);
+		return Files::get($this->room_id);
 	}
 
 	/**
