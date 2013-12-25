@@ -11,6 +11,7 @@ namespace ChatWork\Model;
 
 use ChatWork\Model;
 use ChatWork\Model\Room;
+use ChatWork\Model\Message;
 
 /**
  * Task model
@@ -43,7 +44,7 @@ class Task extends Model
 	protected $room                = array();
 	protected $message_id          = 0;
 	protected $body                = '';
-	protected $limit               = 0;
+	protected $limit_time          = 0;
 	protected $satus               = 'open';
 
 	/**
@@ -79,5 +80,62 @@ class Task extends Model
 		}
 
 		return Room::find($this->room_id);
+	}
+
+	/**
+	 * Get message
+	 *
+	 * @return ChatWork\Model\Message
+	 */
+	public function get_message()
+	{
+		if (empty($this->room_id))
+		{
+			return null;
+		}
+
+		$message_id = $this->message_id;
+
+		return Message::find($this->room_id, $message_id);
+	}
+
+	/**
+	 * Task is expired
+	 *
+	 * @return bool
+	 */
+	public function is_expired()
+	{
+		$limit = $this->limit_time;
+
+		if ($limit === 0)
+		{
+			return false;
+		}
+
+		$now = new \DateTime();
+
+		return (bool) $limit < $now->format(('U'));
+	}
+
+	/**
+	 * Get limit datetime
+	 *
+	 * @param  string
+	 * @return string
+	 */
+	public function get_limit($format = 'Y-m-d')
+	{
+		$limit = $this->limit_time;
+
+		if ($limit === 0)
+		{
+			return 'none';
+		}
+
+		$limit_datetime = new \DateTime();
+		$limit_datetime->setTimestamp($limit);
+
+		return $limit_datetime->format($format);
 	}
 }
