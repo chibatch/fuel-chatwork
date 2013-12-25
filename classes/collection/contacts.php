@@ -2,7 +2,7 @@
 /**
  * FuelPHP ChatWork Packages
  *
- * @author    Kotaro Chiba
+ * @author	Kotaro Chiba
  * @copyright Kotaro Chiba
  * @license   MIT License http://www.opensource.org/licenses/mit-license.php
  * @package   Fuel
@@ -20,19 +20,19 @@ use ChatWork\Model\Contact;
  */
 class Contacts extends Collection
 {
-    /**
-     * Get contact list
-     *
-     * @return ChatWork\Collection\Contacts
-     */
-    public static function find()
-    {
-        $api = static::get_api();
+	/**
+	 * Get contact list
+	 *
+	 * @return ChatWork\Collection\Contacts
+	 */
+	public static function find()
+	{
+		$api = static::get_api();
 
-        $result = $api->get_contacts();
+		$result = $api->get_contacts();
 
-        return new static($result);
-    }
+		return new static($result);
+	}
 
 	/**
 	 * Data to Model
