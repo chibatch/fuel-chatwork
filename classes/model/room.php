@@ -61,7 +61,8 @@ class Room extends Model
 	 */
 	public function leave()
 	{
-		$this->api->leave_room($this->room_id);
+		$api = parent::get_api();
+		$api->leave_room($this->room_id);
 	}
 
 	/**
@@ -69,7 +70,8 @@ class Room extends Model
 	 */
 	public function delete()
 	{
-		$this->api->delete_room($this->room_id);
+		$api = parent::get_api();
+		$api->delete_room($this->room_id);
 	}
 
 	/**
@@ -101,7 +103,8 @@ class Room extends Model
 			'members_readonly_ids' => implode(',', $readonly_ids),
 		);
 
-		$this->api->update_room_members($room_id, $params);
+		$api = parent::get_api();
+		$api->update_room_members($room_id, $params);
 
 		return $this->get_members();
 	}
@@ -135,7 +138,8 @@ class Room extends Model
 	 */
 	public function send_message($message)
 	{
-		$result = $this->api->create_room_message($this->room_id, array(
+		$api = parent::get_api();
+		$result = $api->create_room_message($this->room_id, array(
 			'body' => $message,
 		));
 
@@ -178,7 +182,8 @@ class Room extends Model
 	{
 		$to_ids = \Arr::get($params, 'to_ids');
 
-		return $this->api->create_room_task($this->room_id, array(
+		$api = parent::get_api();
+		return $api->create_room_task($this->room_id, array(
 			'body'   => $task,
 			'to_ids' => implode(',', $to_ids),
 			'limit'  => \Arr::get($params, 'limit'),
