@@ -48,7 +48,8 @@ class CurrentUser extends Model
 	 */
 	public function get_status()
 	{
-		return $this->api->get_my_status();
+		$api = parent::get_api();
+		return $api->get_my_status();
 	}
 
 	/**
