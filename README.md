@@ -2,6 +2,8 @@
 
 ChatWorkのAPIを操作するためのパッケージです。
 
+[![Gitter chat](https://badges.gitter.im/chibatch/fuel-chatwork.png)](https://gitter.im/chibatch/fuel-chatwork)
+
 ## 基本のクラス
 事前にAPIトークンを入手してください。
 
